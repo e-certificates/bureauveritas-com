@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .certificate-box {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0;
+            overflow: auto;           /* স্ক্রলিং সক্রিয় */
+        }
+
+        .certificate-box img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: none;
+            margin: 0 auto;
+        }
+
+        .footer {
+            padding: 12px 0;
+            text-align: center;
+            width: 100%;
+            background-color: transparent;
+            flex-shrink: 0;           /* ফুটার নিচে আটকে থাকবে */
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #000;
+            font-size: 10px;
+            font-weight: normal;
+        }
+
+        #error-msg {
+            padding: 20px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="certificate-box">
+        <img id="certImage" src="" alt="Certificate">
+        <div id="error-msg">
+            <h2 style="font-size: 16px;">Certificate Not Found</h2>
+            <p style="font-size: 12px;">Please check the URL or ID again.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="https://group.bureauveritas.com/" target="_blank">Visit Bureau Veritas website</a>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const certId = urlParams.get('id');
+        const imgElement = document.getElementById('certImage');
+        const errorElement = document.getElementById('error-msg');
+
+        if (certId) {
+            imgElement.src = certId + ".png"; 
+            
+            imgElement.onload = function() {
+                imgElement.style.display = "block";
+                errorElement.style.display = "none";
+            };
+
+            imgElement.onerror = function() {
+                imgElement.style.display = "none";
+                errorElement.style.display = "block";
+            };
+        } else {
+            errorElement.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
