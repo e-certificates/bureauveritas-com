@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificate Verification</title>
+
     <style>
         * {
             margin: 0;
@@ -27,7 +28,8 @@
             justify-content: center;
             width: 100%;
             padding: 0;
-            overflow: auto;           /* স্ক্রলিং সক্রিয় */
+            overflow: auto;
+            position: relative;
         }
 
         .certificate-box img {
@@ -38,19 +40,32 @@
             margin: 0 auto;
         }
 
+        /* ছবির ভিতরের নিচের বাম পাশে লেখা */
         .footer {
-            padding: 12px 0;
-            text-align: center;
-            width: 100%;
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            text-align: left;
             background-color: transparent;
-            flex-shrink: 0;           /* ফুটার নিচে আটকে থাকবে */
+            z-index: 10;
         }
 
         .footer a {
             text-decoration: none;
             color: #000;
-            font-size: 10px;
+            line-height: 20px;
+        }
+
+        .footer a span {
+            font-size: 14px;
             font-weight: normal;
+            display: block;
+        }
+
+        .footer a b {
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
         }
 
         #error-msg {
@@ -59,43 +74,65 @@
             display: none;
         }
     </style>
+
 </head>
+
 <body>
 
     <div class="certificate-box">
+
         <img id="certImage" src="" alt="Certificate">
+
         <div id="error-msg">
-            <h2 style="font-size: 16px;">Certificate Not Found</h2>
-            <p style="font-size: 12px;">Please check the URL or ID again.</p>
+            <h2 style="font-size:16px;">Certificate Not Found</h2>
+            <p style="font-size:12px;">Please check the URL or ID again.</p>
         </div>
+
+
+        <div class="footer">
+            <a href="https://group.bureauveritas.com/" target="_blank">
+                <span>Visit</span>
+                <b>Bureau Veritas Website</b>
+            </a>
+        </div>
+
     </div>
 
-    <div class="footer">
-        <a href="https://group.bureauveritas.com/" target="_blank">Visit Bureau Veritas website</a>
-    </div>
 
     <script>
+
         const urlParams = new URLSearchParams(window.location.search);
         const certId = urlParams.get('id');
+
         const imgElement = document.getElementById('certImage');
         const errorElement = document.getElementById('error-msg');
 
+
         if (certId) {
-            imgElement.src = certId + ".png"; 
-            
+
+            imgElement.src = certId + ".png";
+
+
             imgElement.onload = function() {
                 imgElement.style.display = "block";
                 errorElement.style.display = "none";
             };
 
+
             imgElement.onerror = function() {
                 imgElement.style.display = "none";
                 errorElement.style.display = "block";
             };
+
+
         } else {
+
             errorElement.style.display = "block";
+
         }
+
     </script>
+
 
 </body>
 </html>
