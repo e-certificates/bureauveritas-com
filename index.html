@@ -40,24 +40,25 @@
             margin: 0 auto;
         }
 
-        /* ছবির ভিতরের নিচের বাম পাশে লেখা */
+        /* Footer inside image */
         .footer {
             position: absolute;
             bottom: 15px;
             left: 15px;
-            text-align: left;
-            background-color: transparent;
+            width: 170px;
+            text-align: center;
             z-index: 10;
         }
 
         .footer a {
             text-decoration: none;
             color: #000;
-            line-height: 20px;
+            display: block;
+            line-height: 18px;
         }
 
         .footer a span {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: normal;
             display: block;
         }
@@ -88,7 +89,6 @@
             <p style="font-size:12px;">Please check the URL or ID again.</p>
         </div>
 
-
         <div class="footer">
             <a href="https://group.bureauveritas.com/" target="_blank">
                 <span>Visit</span>
@@ -98,41 +98,30 @@
 
     </div>
 
-
     <script>
-
         const urlParams = new URLSearchParams(window.location.search);
         const certId = urlParams.get('id');
 
         const imgElement = document.getElementById('certImage');
         const errorElement = document.getElementById('error-msg');
 
-
         if (certId) {
-
             imgElement.src = certId + ".png";
-
 
             imgElement.onload = function() {
                 imgElement.style.display = "block";
                 errorElement.style.display = "none";
             };
 
-
             imgElement.onerror = function() {
                 imgElement.style.display = "none";
                 errorElement.style.display = "block";
             };
 
-
         } else {
-
             errorElement.style.display = "block";
-
         }
-
     </script>
-
 
 </body>
 </html>
