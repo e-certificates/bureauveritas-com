@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Add Certificate</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container admin">
+    <header>
+      <h1>Certificate Admin</h1>
+      <button id="logout-btn">Logout</button>
+    </header>
+
+    <div class="form-container">
+      <form id="cert-form">
+        <label>Certificate Token (unique)</label>
+        <input type="text" id="token" required placeholder="CERT-XYZ123">
+
+        <label>Recipient Name (optional)</label>
+        <input type="text" id="name" placeholder="John Doe">
+
+        <label>Certificate Image</label>
+        <input type="file" id="image" accept="image/*" required>
+        <small>Or paste direct image URL (optional)</small>
+        <input type="url" id="image-url" placeholder="https://...">
+
+        <button type="submit">Upload & Save Certificate</button>
+      </form>
+    </div>
+
+    <div id="status"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
